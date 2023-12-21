@@ -32,7 +32,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
 
-      - run: pnpm build
+      - run: pnpm build:ci
       # - run: pnpm test:ci
       - name: Add 404 page
         run: cp ./dist/defer-demo/index.html ./dist/defer-demo/404.html
