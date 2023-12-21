@@ -1,0 +1,53 @@
+<h1>Deferrable Views</h1>
+
+<ul>
+    <li>used to defer the loading of dependencies within a template</li>
+    <li>
+        The dependencies include components, directives, and pipes, and any
+        associated CSS
+    </li>
+</ul>
+
+<br />
+
+<pre>
+&#64;defer {{ '{' }}
+    &lt;large-component /&gt;
+{{ '}' }}
+</pre>
+
+<br />
+
+<h2>Triggers</h2>
+
+<ul>
+    <li>on idle</li>
+    <li>on viewport</li>
+    <li>on interaction</li>
+    <li>on hover</li>
+    <li>on immediate</li>
+    <li>on timer</li>
+</ul>
+
+<br />
+
+<h2>Blocks</h2>
+
+<ul>
+    <li>&#64;defer</li>
+    <li>&#64;placeholder</li>
+    <li>&#64;loading</li>
+    <li>&#64;error</li>
+</ul>
+
+<br />
+
+<h2>Limitations</h2>
+
+<ul>
+    <li>The dependencies must be standalone</li>
+    <li>
+        Must not be directly referenced from the same file, outside of
+        &#64;defer blocks
+    </li>
+</ul>

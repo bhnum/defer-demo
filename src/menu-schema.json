@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "MenuItem": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "imagePath": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "subitems": {
+                    "items": {
+                        "$ref": "#/definitions/MenuSubitem"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "MenuSection": {
+            "properties": {
+                "caption": {
+                    "type": "string"
+                },
+                "iconPath": {
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "#/definitions/MenuItem"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "MenuSubitem": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "sections": {
+            "items": {
+                "$ref": "#/definitions/MenuSection"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+}

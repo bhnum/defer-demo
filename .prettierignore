@@ -1,0 +1,7 @@
+buid
+dist
+node_modules
+pnpm-lock.yaml
+.angular/cache
+images
+src/assets/menu/compressed

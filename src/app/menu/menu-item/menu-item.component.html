@@ -1,0 +1,56 @@
+<mat-card class="item-card">
+    <mat-card-header>
+        <div class="card-header">
+            @if (item.imagePath) {
+                <a
+                    [routerLink]="[
+                        '',
+                        {
+                            outlets: {
+                                preview: [section.caption, item.name]
+                            }
+                        }
+                    ]"
+                    [fragment]="section.caption"
+                    [replaceUrl]="true"
+                    class="thumbnail-link"
+                    title="پیش‌نمایش"
+                >
+                    @defer (on viewport; on idle; prefetch on immediate) {
+                        <app-responsive-image
+                            [alt]="item.name"
+                            [path]="item.imagePath"
+                            class="thumbnail"
+                        />
+                    } @placeholder {
+                        <div class="thumbnail"></div>
+                    }
+                </a>
+            } @else {
+                <div class="default-thumbnail">
+                    <mat-icon
+                        [svgIcon]="'category:' + section.iconPath"
+                        color="accent"
+                    ></mat-icon>
+                </div>
+            }
+
+            <div class="item-details">
+                <mat-card-title class="name">{{ item.name }}</mat-card-title>
+                <mat-card-subtitle class="description">
+                    {{ item.description }}
+                </mat-card-subtitle>
+                @if (item.price !== undefined) {
+                    <span class="price mat-subtitle-1"
+                        >{{ item.price | localNumber }} تومان</span
+                    >
+                }
+                <app-menu-subitems
+                    class="subitems"
+                    [subitems]="item.subitems"
+                />
+            </div>
+        </div>
+    </mat-card-header>
+    <mat-card-content></mat-card-content>
+</mat-card>

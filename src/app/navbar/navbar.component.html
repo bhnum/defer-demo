@@ -1,0 +1,12 @@
+<div #nav class="nav">
+    @if (menu$ | async; as menu) {
+        @for (section of menu.sections; track section) {
+            <app-nav-item
+                #navItem
+                [section]="section"
+                [active]="(currentSection$ | async) === section.caption"
+                (click)="scrollToSection(section)"
+            />
+        }
+    }
+</div>

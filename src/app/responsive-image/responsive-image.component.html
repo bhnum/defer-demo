@@ -1,0 +1,17 @@
+<picture>
+    @for (mediaType of mediaTypes; track mediaType) {
+        @for (res of [256, 512, 1024]; track res) {
+            <source
+                [srcset]="path | compressedMenuImage: res : mediaType.extension"
+                [media]="'(max-width: ' + res * 2 + 'px)'"
+                [type]="mediaType.type"
+            />
+        }
+    }
+
+    <img
+        [alt]="alt"
+        [src]="path | compressedMenuImage: 1024 : 'jpg'"
+        loading="lazy"
+    />
+</picture>

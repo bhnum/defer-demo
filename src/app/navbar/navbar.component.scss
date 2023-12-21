@@ -1,0 +1,61 @@
+@use '_breakpoints' as *;
+
+$scrollbar-thumb-color: rgba(0, 0, 0, 0.2);
+
+.nav {
+    direction: ltr;
+    max-height: min(100%, 100vh - var(--header-height));
+    overflow-y: auto;
+    position: sticky;
+    top: var(--header-height);
+
+    width: 8rem;
+    @include media('<small') {
+        width: 7rem;
+    }
+
+    animation: fadeOut 200ms ease-in-out forwards;
+    &:hover {
+        animation: fadeIn 200ms ease-in-out forwards;
+    }
+
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb-color);
+    }
+}
+
+@property --scrollbar-thumb-color {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: transparent;
+}
+
+@keyframes fadeIn {
+    0% {
+        --scrollbar-thumb-color: transparent;
+        scrollbar-color: transparent transparent;
+    }
+
+    100% {
+        --scrollbar-thumb-color: #{$scrollbar-thumb-color};
+        scrollbar-color: $scrollbar-thumb-color transparent;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        --scrollbar-thumb-color: #{$scrollbar-thumb-color};
+        scrollbar-color: $scrollbar-thumb-color transparent;
+    }
+
+    100% {
+        --scrollbar-thumb-color: transparent;
+        scrollbar-color: transparent transparent;
+    }
+}

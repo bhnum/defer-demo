@@ -1,0 +1,17 @@
+@for (d of data; track d) {
+    @defer (on viewport) {
+        @switch (d) {
+            @case ('a') {
+                <app-scroll-component-a />
+            }
+            @case ('b') {
+                <app-scroll-component-b />
+            }
+            @case ('c') {
+                <app-scroll-component-c />
+            }
+        }
+    } @placeholder {
+        <app-placeholder/>
+    }
+}

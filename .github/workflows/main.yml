@@ -1,0 +1,63 @@
+name: Web pages CI/CD
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+  workflow_dispatch:
+    inputs:
+      deploy:
+        type: boolean
+        required: true
+        default: false
+        description: Deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'pnpm'
+      - run: pnpm install
+
+      - run: pnpm build
+      - run: pnpm test:ci
+      - name: Add 404 page
+        run: cp ./dist/defer-demo/index.html ./dist/defer-demo/404.html
+
+      - name: Upload artifact
+        if: github.ref == 'refs/heads/main' || github.event.inputs.deploy == 'true'
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './dist/defer-demo'
+
+  deploy:
+    needs: build
+
+    if: github.ref == 'refs/heads/main' || github.event.inputs.deploy == 'true'
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

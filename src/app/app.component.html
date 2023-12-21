@@ -1,0 +1,26 @@
+<div class="layout">
+    <mat-toolbar color="primary" class="header" role="banner">
+        Deferrable Views
+        <a mat-button [routerLink]="['']">Home</a>
+        <a mat-button [routerLink]="['comments']">Comments</a>
+        <a mat-button [routerLink]="['scroll']">Scroll</a>
+    </mat-toolbar>
+
+    <main>
+        <router-outlet hidden />
+    </main>
+
+    <footer>
+        <mat-toolbar color="primary" class="footer">
+            <div class="contact">
+                <span>I'm a footer</span>
+            </div>
+        </mat-toolbar>
+    </footer>
+</div>
+
+<router-outlet name="preview" />
+
+@if (isProduction) {
+    <app-analytics />
+}
