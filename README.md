@@ -1,6 +1,6 @@
 # Defer demo [![CI/CD status](https://github.com/bhnum/defer-demo/actions/workflows/main.yml/badge.svg)](https://github.com/bhnum/defer-demo/actions/workflows/main.yml)
 
-Explaining the Deferrable Views introduced in Angular v17 using example.
+Explaining the Deferrable Views introduced in Angular v17 using some examples.
 
 ## Development server
 
