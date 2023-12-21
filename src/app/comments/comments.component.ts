@@ -16,5 +16,5 @@ class S {
     providers: [S],
 })
 export class CommentsComponent {
-    constructor(s: S){}
+    constructor(s: S) {}
 }
